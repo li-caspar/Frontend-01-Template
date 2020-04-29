@@ -23,16 +23,26 @@ function convertStringToNumber(str, hex) {
     return number;
 }
 
-console.log(convertStringToNumber('10.0123'));
-console.log(convertStringToNumber('a2b'));
-console.log(convertStringToNumber('ab'));
 
 //数字转成字符串
 function convertNumberToString(number, hex) {
-     if(arguments.length < 2) {
-        hex = 10;
-     }
+    if(arguments.length < 2) {
+       hex = 10;
+    }
+    var integer = Math.floor(number);//取整数部分
+    var fraction = number - integer
+    var string = '';
+    while(integer > 0) {
+       string = String(integer % x) + string;
+       integer = Math.floor(integer / x);
+    }
+    if(fraction) {
+        string +='.'
+        while(fraction) {
+            fraction *= hex
+            string += Math.floor(fraction)
+            fraction -= Math.floor(fraction)
+        }
+    }
+    return string;
 }
-
-console.log(convertNumberToString('a2b'));
-console.log(convertNumberToString('345'));
