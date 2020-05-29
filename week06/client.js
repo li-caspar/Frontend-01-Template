@@ -1,5 +1,5 @@
 const net = require("net")
-
+const parse = require("./parser")
 class Request {
   constructor({
     host,
@@ -54,6 +54,7 @@ ${this.bodyText}`
       }
       connection.on('data', (data) => {
         resPar.receive(data.toString())
+        // console.log("isFinished", resPar.getIsFinished());
         if(resPar.getIsFinished()) {
           resolve(resPar.getResponse())
         }
@@ -265,7 +266,8 @@ void async function() {
   })
   //console.log(req.toString())
   const res = await req.send();
-  console.log(res);
+  parse.parseHTML(res.body)
+  //console.log(res.body);
 } ()
 
 
